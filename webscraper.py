@@ -22,7 +22,7 @@ def obtener_html(url):
         return None
 
 # Función para extraer el número del <h1>
-# En mi caso optengo el numero de coches de un h1
+# En mi caso obtengo el número de coches de un h1
 def obtener_numero_h1(html):
     soup = BeautifulSoup(html, "html.parser")
     h1 = soup.find("h1", class_="tablet:text-[28px] laptop:text-4xl font-medium max-tablet:text-3xl max-w-[700px]")
@@ -42,12 +42,19 @@ def enviar_whatsapp(mensaje):
     )
     print(f"✅ Notificación enviada por WhatsApp: {mensaje}")
 
-# Cargar el último número almacenado (si existe)
+# Asegurarse de que no existe un directorio con el mismo nombre
+if os.path.isdir("numero_anterior.txt"):
+    print("Error: 'numero_anterior.txt' es un directorio, no un archivo.")
+    exit(1)
+
+# Crear o cargar el último número almacenado (si existe)
 try:
     with open("numero_anterior.txt", "r") as f:
         numero_anterior = f.read().strip()
 except FileNotFoundError:
     numero_anterior = ""
+    with open("numero_anterior.txt", "w") as f:
+        f.write("")  # Guardamos un archivo vacío si no existe
 
 # Obtener el HTML actual
 html_actual = obtener_html(URL)
@@ -63,10 +70,6 @@ if html_actual:
             # Enviar notificación por WhatsApp
             enviar_whatsapp(mensaje)
 
-            # Guardar el nuevo número
+            # Actualizar el número almacenado en el archivo
             with open("numero_anterior.txt", "w") as f:
                 f.write(numero_actual)
-        else:
-            print(f"✅ No hay cambios en el número de coches ({numero_actual})")
-    else:
-        print("❌ No se encontró un número en el h1")
