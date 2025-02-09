@@ -53,7 +53,7 @@ Antes de ejecutar este proyecto, necesitarás tener las siguientes herramientas 
    	TWILIO_AUTH_TOKEN=tu_token
    	TWILIO_WHATSAPP_NUMBER=whatsapp:+123456789
    	MY_WHATSAPP_NUMBER=whatsapp:+123456789
-     ```
+    ```
 
    - **Opción 2: Edita directamente el archivo `docker-compose.yml`**. Si prefieres, también puedes colocar las variables directamente en el archivo `docker-compose.yml`.
 
