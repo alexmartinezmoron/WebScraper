@@ -34,7 +34,18 @@ Antes de ejecutar este proyecto, necesitarás tener las siguientes herramientas 
    cd webscraper
    ```
 
-2. **Configura las variables de entorno**:
+2.Crea tu bot en Telegram:
+
+   Para generar el TELEGRAM_BOT_TOKEN, sigue estos pasos para crear un bot en Telegram:
+   
+   Abre Telegram y busca el usuario @BotFather.
+   Inicia una conversación con él y usa el comando /newbot.
+   Sigue las instrucciones y elige un nombre y un nombre de usuario para tu bot (el nombre de usuario debe terminar en bot, por ejemplo, MiScraperBot).
+   Una vez creado, BotFather te dará un Token de acceso. Copia este token y agrégalo en el archivo .env en la variable TELEGRAM_BOT_TOKEN.
+   Para obtener el TELEGRAM_CHAT_ID, puedes usar el bot @userinfobot en Telegram o la API de Telegram para obtener el ID del chat donde se enviarán los mensajes.  
+
+
+3. **Configura las variables de entorno**:
 
    Solo necesitas configurar las variables de entorno. Puedes hacerlo de dos maneras:
 
@@ -56,10 +67,6 @@ Antes de ejecutar este proyecto, necesitarás tener las siguientes herramientas 
     ```
 
    - **Opción 2: Edita directamente el archivo `docker-compose.yml`**. Si prefieres, también puedes colocar las variables directamente en el archivo `docker-compose.yml`.
-
-3. **Configura Docker Compose**:
-
-   El proyecto ya incluye un archivo `docker-compose.yml` configurado. Asegúrate de que el archivo `.env` esté presente en la misma carpeta que el archivo `docker-compose.yml`. Este archivo configurará el contenedor, las variables de entorno y cómo ejecutar el scraper.
 
 4. **Construye y ejecuta el contenedor**:
 
