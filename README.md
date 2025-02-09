@@ -41,18 +41,18 @@ Antes de ejecutar este proyecto, necesitarás tener las siguientes herramientas 
    - **Opción 1: Edita el archivo `.env`**. Crea un archivo `.env` en la raíz del proyecto con los siguientes valores (reemplaza con tus credenciales de Twilio y la URL de tu sitio web):
 
      ```env
-      BASE_URL_FACILITEA="https:url a scrapear"
-      BASE_URL_RENEW = "https:url a scrapear"
-   	BASE_URL_RENEW_PAGINADO = "https:url a scrapear"
-   	TELEGRAM_BOT_TOKEN=tu token
-   	TELEGRAM_CHAT_ID_User1=123456789
-   	TELEGRAM_CHAT_ID_User2=123456789
-   	TELEGRAM_CHAT_ID_User3=123456789
-   	TELEGRAM_CHAT_IDS=123456789,123456789,123456789
-   	TWILIO_SID=tu_sid
-   	TWILIO_AUTH_TOKEN=tu_token
-   	TWILIO_WHATSAPP_NUMBER=whatsapp:+123456789
-   	MY_WHATSAPP_NUMBER=whatsapp:+123456789
+      BASE_URL_FACILITEA="https://url-a-scrapear"
+      BASE_URL_RENEW="https://url-a-scrapear"
+      BASE_URL_RENEW_PAGINADO="https://url-a-scrapear"
+      TELEGRAM_BOT_TOKEN=tu_token
+      TELEGRAM_CHAT_ID_User1=123456789
+      TELEGRAM_CHAT_ID_User2=123456789
+      TELEGRAM_CHAT_ID_User3=123456789
+      TELEGRAM_CHAT_IDS=123456789,123456789,123456789
+      TWILIO_SID=tu_sid
+      TWILIO_AUTH_TOKEN=tu_token
+      TWILIO_WHATSAPP_NUMBER=whatsapp:+123456789
+      MY_WHATSAPP_NUMBER=whatsapp:+123456789
     ```
 
    - **Opción 2: Edita directamente el archivo `docker-compose.yml`**. Si prefieres, también puedes colocar las variables directamente en el archivo `docker-compose.yml`.
