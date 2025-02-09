@@ -1,14 +1,19 @@
 
-# Web Scraper + Twilio WhatsApp
+# Web Scraper + Bot Telegram
 
-Este proyecto es un **web scraper** que extrae información de un sitio web y la envía a través de WhatsApp utilizando la API de **Twilio**. El contenedor Docker ya está preparado para que solo tengas que lanzar el archivo `docker-compose.yml` con tus variables de entorno personalizadas.
+Este proyecto es un **web scraper** que extrae información de dos sitios web uno utilizando request y otro sellenium despues de gestiona la informacion obtenida creando un json y notifica via Telegram si hay algun registro nuevo o si cambia la informacion de alguno ya almacenado. Hay una imagen subida a DockerHub puedes visitar el repositorio https://hub.docker.com/r/pinchapapas/webscraper.
 
-No necesitas editar el código ni crear una imagen personalizada, solo configura las variables de entorno y ejecuta el contenedor.
+No necesitas editar el código ni crear una imagen personalizada, solo descarga docker-compose.yml configura las variables de entorno lanzalo.
+```bash
+cd /rutaDeDocker-Compose
+docker-compose up -d
+```
 
 ## Características
 - **Extracción de datos** de un sitio web de coches.
-- **Envío de notificaciones** a través de WhatsApp utilizando la API de Twilio.
-- **Ejecutado periódicamente** con cron en Docker.
+- **Envío de notificaciones** a través de Telegram utilizando un bot.
+- **Envío de notificaciones** a través de WhatsApp utilizando la API de Twilio puedes editar el proyecto para enviar notificaciones con Twilio_bot.
+- **Ejecutado periódicamente**  bucle infinito con un time.sleep de 10 min.
 - Configuración fácil mediante variables de entorno.
 
 ## Requisitos
@@ -36,12 +41,22 @@ Antes de ejecutar este proyecto, necesitarás tener las siguientes herramientas 
    - **Opción 1: Edita el archivo `.env`**. Crea un archivo `.env` en la raíz del proyecto con los siguientes valores (reemplaza con tus credenciales de Twilio y la URL de tu sitio web):
 
      ```env
-     TWILIO_SID=tu_sid
-     TWILIO_AUTH_TOKEN=tu_token
-     TWILIO_WHATSAPP_NUMBER=whatsapp:+123456789
-     MY_WHATSAPP_NUMBER=whatsapp:+123456789
-     URL="https://faciliteacoches.com/coches?search=golf"
-     ```
+     BASE_URL_FACILITEA="https:url a scrapear"
+      BASE_URL_RENEW = "https:url a scrapear"
+   	BASE_URL_RENEW_PAGINADO = "https:url a scrapear"
+   
+   	TELEGRAM_BOT_TOKEN=tu token
+   
+   	TELEGRAM_CHAT_ID_User1=123456789
+   	TELEGRAM_CHAT_ID_User2=123456789
+   	TELEGRAM_CHAT_ID_User3=123456789
+   	TELEGRAM_CHAT_IDS=123456789,123456789,123456789
+   	
+   	TWILIO_SID=tu_sid
+   	TWILIO_AUTH_TOKEN=tu_token
+   	TWILIO_WHATSAPP_NUMBER=whatsapp:+123456789
+   	MY_WHATSAPP_NUMBER=whatsapp:+123456789
+        ```
 
    - **Opción 2: Edita directamente el archivo `docker-compose.yml`**. Si prefieres, también puedes colocar las variables directamente en el archivo `docker-compose.yml`.
 
