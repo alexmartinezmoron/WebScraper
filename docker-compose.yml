@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  webscraper:
+    image: pinchapapas/webscraper:2.6 
+    environment:
+      BASE_URL_FACILITEA: "url"
+      BASE_URL_RENEW: "url"
+      BASE_URL_RENEW_PAGINADO: "url"
+      TELEGRAM_BOT_TOKEN: "tu_token"
+      TELEGRAM_CHAT_IDS: "tus_IDS"
+    restart: always
+    volumes:
+      - ./app:/app  # Montamos solo la carpeta necesaria
+    command: ["python", "app.py"]

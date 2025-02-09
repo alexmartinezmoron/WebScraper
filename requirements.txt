@@ -1,4 +1,8 @@
 requests
 beautifulsoup4
 twilio
-python-dotenv  # Para leer las variables del archivo .env (si lo usas)
+python-dotenv
+pandas
+numpy
+selenium
+webdriver-manager

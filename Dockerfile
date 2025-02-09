@@ -1,27 +1,45 @@
-# Usamos una imagen base de Python
+# Usamos una imagen base de Python ligera
 FROM python:3.9-slim
 
-# Instalamos cron y otras dependencias necesarias
-RUN apt-get update && apt-get install -y cron
+# Instalamos las dependencias necesarias
+RUN apt-get update && apt-get install -y \
+    python3-pip \
+    wget \
+    unzip \
+    curl \
+    gnupg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalamos Google Chrome
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
+    apt-get update && \
+    apt-get install -y google-chrome-stable && \
+    rm -rf /var/lib/apt/lists/*
+
+# Instalamos ChromeDriver
+RUN CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
+    wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip && \
+    unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/ && \
+    rm /tmp/chromedriver.zip
 
 # Establecemos el directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copiamos los archivos del proyecto al contenedor
-COPY . /app
+# Copiamos los archivos antes de instalar dependencias para aprovechar mejor la caché de Docker
+COPY requirements.txt .
 
-# Instalamos las dependencias necesarias
+# Instalamos las dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiamos el archivo crontab con la configuración para ejecutar el script cada hora
-COPY crontab /etc/cron.d/webscraper-cron
+# Copiamos la aplicación después de instalar las dependencias
+COPY app/ .
 
-# Establecemos permisos para el archivo crontab
-RUN chmod 0644 /etc/cron.d/webscraper-cron
+# Asignamos permisos totales a la carpeta /app
+RUN chmod -R 777 /app
 
+# Establecemos la variable de entorno para Python (mejor para logs)
+ENV PYTHONUNBUFFERED=1
 
-# Exponemos el puerto (opcional, si lo necesitas)
-EXPOSE 8080
-
-# Comando para iniciar cron y ejecutar el script
-CMD ["cron", "-f"]
+# Comando por defecto para ejecutar el script
+CMD ["python", "app.py"]
