@@ -1,96 +1,89 @@
 
-# Web Scraper + Bot Telegram
+# 🚀 Web Scraper + Bot Telegram  
 
-Este proyecto es un **web scraper** que extrae información de dos sitios web uno utilizando request y otro sellenium despues de gestiona la informacion obtenida creando un json y notifica via Telegram si hay algun registro nuevo o si cambia la informacion de alguno ya almacenado. Hay una imagen subida a DockerHub puedes visitar el repositorio https://hub.docker.com/r/pinchapapas/webscraper.
+Este proyecto es un **web scraper** que extrae información de dos sitios web—uno utilizando `requests` y otro con `Selenium`—para gestionar los datos obtenidos, crear un JSON y notificar vía **Telegram** si hay registros nuevos o si cambia la información de alguno ya almacenado.  
 
-No necesitas editar el código ni crear una imagen personalizada, solo descarga docker-compose.yml configura las variables de entorno lanzalo.
+✅ **Imagen disponible en DockerHub**: [pinchapapas/webscraper](https://hub.docker.com/r/pinchapapas/webscraper)  
+
+## ⚡ Instalación rápida  
+
+No necesitas modificar el código ni crear una imagen personalizada. Solo descarga `docker-compose.yml`, configura las variables de entorno y ejecútalo:  
+
 ```bash
 cd /rutaDeDocker-Compose
 docker-compose up -d
 ```
 
-## Características
-- **Extracción de datos** de un sitio web de coches.
-- **Envío de notificaciones** a través de Telegram utilizando un bot.
-- **Envío de notificaciones** a través de WhatsApp utilizando la API de Twilio puedes editar el proyecto para enviar notificaciones con Twilio_bot.
-- **Ejecutado periódicamente**  bucle infinito con un time.sleep de 10 min.
-- Configuración fácil mediante variables de entorno.
+---
 
-## Requisitos
+## ✨ Características  
 
-Antes de ejecutar este proyecto, necesitarás tener las siguientes herramientas instaladas:
+✔ **Extracción de datos** de un sitio web de coches.  
+✔ **Notificaciones en tiempo real** a través de **Telegram**.  
+✔ **Integración con WhatsApp** utilizando la API de **Twilio** (opcional).  
+✔ **Ejecución periódica automática**, con un **bucle infinito** y `time.sleep(10 min)`.  
+✔ **Fácil configuración** mediante variables de entorno.  
 
-- **Docker**: Para crear y ejecutar contenedores.
-- **Docker Compose**: Para gestionar el contenedor y las variables de entorno.
+---
 
-## Configuración
+## 🛠 Requisitos  
 
-1. **Clona este repositorio**:
+Antes de ejecutar este proyecto, asegúrate de tener instalado:  
 
-   Si no tienes el repositorio en tu máquina, clónalo usando el siguiente comando:
+- 🐳 **Docker** → Para ejecutar el contenedor.  
+- 📦 **Docker Compose** → Para gestionar las variables de entorno.
 
-   ```bash
-   git clone https://github.com/alexmartinezmoron/webscraper.git
-   cd webscraper
-   ```
+---
 
-2.Crea tu bot en Telegram:
+## 🔧 Configuración  
 
-   Para generar el TELEGRAM_BOT_TOKEN, sigue estos pasos para crear un bot en Telegram:
-   
-   Abre Telegram y busca el usuario @BotFather.
-   Inicia una conversación con él y usa el comando /newbot.
-   Sigue las instrucciones y elige un nombre y un nombre de usuario para tu bot (el nombre de usuario debe terminar en bot, por ejemplo, MiScraperBot).
-   Una vez creado, BotFather te dará un Token de acceso. Copia este token y agrégalo en el archivo .env en la variable TELEGRAM_BOT_TOKEN.
-   Para obtener el TELEGRAM_CHAT_ID, puedes usar el bot @userinfobot en Telegram o la API de Telegram para obtener el ID del chat donde se enviarán los mensajes.  
+### 1. Clona este repositorio
 
+Si no tienes el repositorio en tu máquina, clónalo usando el siguiente comando:
 
-3. **Configura las variables de entorno**:
+```bash
+git clone https://github.com/alexmartinezmoron/webscraper.git
+cd webscraper
+```
 
-   Solo necesitas configurar las variables de entorno. Puedes hacerlo de dos maneras:
+### 2. Crea tu bot en Telegram  
 
-   - **Opción 1: Edita el archivo `.env`**. Crea un archivo `.env` en la raíz del proyecto con los siguientes valores (reemplaza con tus credenciales de Twilio y la URL de tu sitio web):
+Para generar el **TELEGRAM_BOT_TOKEN**, sigue estos pasos para crear un bot en Telegram:  
 
-     ```env
-      BASE_URL_FACILITEA="https://url-a-scrapear"
-      BASE_URL_RENEW="https://url-a-scrapear"
-      BASE_URL_RENEW_PAGINADO="https://url-a-scrapear"
-      TELEGRAM_BOT_TOKEN=tu_token
-      TELEGRAM_CHAT_ID_User1=123456789
-      TELEGRAM_CHAT_ID_User2=123456789
-      TELEGRAM_CHAT_ID_User3=123456789
-      TELEGRAM_CHAT_IDS=123456789,123456789,123456789
-      TWILIO_SID=tu_sid
-      TWILIO_AUTH_TOKEN=tu_token
-      TWILIO_WHATSAPP_NUMBER=whatsapp:+123456789
-      MY_WHATSAPP_NUMBER=whatsapp:+123456789
-    ```
+1. Abre Telegram y busca el usuario **@BotFather**.  
+2. Inicia una conversación con él y usa el comando `/newbot`.  
+3. Sigue las instrucciones y elige un nombre y un nombre de usuario para tu bot (el nombre de usuario debe terminar en **bot**, por ejemplo, `MiScraperBot`).  
+4. Una vez creado, **BotFather** te dará un **Token de acceso**. Copia este token y agrégalo en el archivo `.env` en la variable **TELEGRAM_BOT_TOKEN**.  
+5. Para obtener el **TELEGRAM_CHAT_ID**, puedes usar el bot **@userinfobot** en Telegram o la API de Telegram para obtener el ID del chat donde se enviarán los mensajes.
 
-   - **Opción 2: Edita directamente el archivo `docker-compose.yml`**. Si prefieres, también puedes colocar las variables directamente en el archivo `docker-compose.yml`.
+### 3. Configura las variables de entorno  
 
-4. **Construye y ejecuta el contenedor**:
+Solo necesitas configurar las variables de entorno. Puedes hacerlo de dos maneras:
 
-   Para construir y ejecutar el contenedor con las variables de entorno definidas, solo ejecuta el siguiente comando:
+#### Opción 1: Edita el archivo `.env`
 
-   ```bash
-   docker-compose up --build
-   ```
+Crea un archivo `.env` en la raíz del proyecto con los siguientes valores (reemplaza con tus credenciales de Twilio y la URL de tu sitio web):
 
-   Esto descargará la imagen, instalará las dependencias necesarias y ejecutará el scraper de forma periódica.
+```env
+BASE_URL_FACILITEA="https://url-a-scrapear"
+BASE_URL_RENEW="https://url-a-scrapear"
+BASE_URL_RENEW_PAGINADO="https://url-a-scrapear"
+TELEGRAM_BOT_TOKEN=tu_token
+TELEGRAM_CHAT_ID_User1=123456789
+TELEGRAM_CHAT_ID_User2=123456789
+TELEGRAM_CHAT_ID_User3=123456789
+TELEGRAM_CHAT_IDS=123456789,123456789,123456789
+TWILIO_SID=tu_sid
+TWILIO_AUTH_TOKEN=tu_token
+TWILIO_WHATSAPP_NUMBER=whatsapp:+123456789
+MY_WHATSAPP_NUMBER=whatsapp:+123456789
+```
 
-## Cron Jobs
+#### Opción 2: Edita directamente el archivo `docker-compose.yml`
 
-El scraper está configurado para ejecutarse cada hora utilizando **cron**. Los resultados del scraper se guardarán en el archivo `/var/log/cron.log`, donde podrás revisar los logs de ejecución.
+Si prefieres, también puedes colocar las variables directamente en el archivo `docker-compose.yml`.  
 
-## Variables de Entorno
-
-Las siguientes variables de entorno se usan para configurar el comportamiento del scraper:
-
-- `TWILIO_SID`: Tu **SID de Twilio**.
-- `TWILIO_AUTH_TOKEN`: Tu **token de autenticación de Twilio**.
-- `TWILIO_WHATSAPP_NUMBER`: El número de **WhatsApp de Twilio** desde el que se enviarán los mensajes (en formato `whatsapp:+<número>`).
-- `MY_WHATSAPP_NUMBER`: Tu número de **WhatsApp** al que se enviarán las notificaciones (en formato `whatsapp:+<número>`).
-- `URL`: La **URL del sitio web** de donde el scraper extraerá los datos.
+---
 
 ## Docker Hub
 
@@ -102,6 +95,8 @@ docker pull pinchapapas/webscraper:latest
 
 Una vez descargado, solo tienes que ejecutar el `docker-compose.yml` como se explicó anteriormente.
 
-## Licencia
+---
+
+## 📜 Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
